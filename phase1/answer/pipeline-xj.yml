@@ -1,0 +1,34 @@
+---
+jobs:
+- name: job-deploy-app
+  public: true
+  serial: true
+  plan:
+  - get: resource-cf-app
+    trigger: true
+
+  - put: resource-deploy-cf-app
+    params:
+      manifest: resource-cf-app/manifest.yml
+      path: resource-cf-app
+
+resources:
+- name: resource-cf-app
+  type: git
+  source:
+    uri: https://github.com/xiujiao/cf-env
+
+- name: resource-deploy-cf-app
+  type: cf
+  source:
+    api: {{cf-api}}
+    username: {{cf-username}}
+    password: {{cf-password}}
+    organization: {{cf-organization}}
+    space: {{cf-space}}
+    skip_cert_check: true
+
+# The fly command XJ used to target concourse and set pipeline is
+# `fly --target sw-vsphere login  --concourse-url https://185.99.186.164 sync -k`
+# `fly set-pipeline -t sw-vsphere -c phase1/pipeline.yml -p xj-deploy-cf-app --load-vars-from credentials.yml`
+

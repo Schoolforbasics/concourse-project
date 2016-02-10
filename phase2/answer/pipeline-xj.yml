@@ -1,0 +1,50 @@
+---
+jobs:
+- name: job-deploy-app
+  public: true
+  serial: true
+  plan:
+  - get: resource-cf-app
+    trigger: true
+  - put: resource-deploy-cf-app
+    params:
+      manifest: resource-cf-app/manifest.yml
+      path: resource-cf-app
+
+- name: job-scale-app
+  public: true
+  serial: true
+  plan:
+  - get: resource-cf-app
+    trigger: true
+    passed: [job-deploy-app]
+  - task: scale-cf-app
+    config:
+      platform: linux
+      image: {{docker-hub-task-image}}
+      inputs:
+      - {name: resource-cf-app, path: .}
+      run:
+        path: ./bin/scale-app
+        args:
+        - {{cf-api}}
+        - {{cf-app-name}}
+        - {{cf-username}}
+        - {{cf-password}}
+        - 5
+
+resources:
+- name: resource-cf-app
+  type: git
+  source:
+    uri: https://github.com/xiujiao/cf-env
+
+- name: resource-deploy-cf-app
+  type: cf
+  source:
+    api: {{cf-api}}
+    username: {{cf-username}}
+    password: {{cf-password}}
+    organization: {{cf-organization}}
+    space: {{cf-space}}
+    skip_cert_check: true
