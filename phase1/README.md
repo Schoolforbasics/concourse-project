@@ -12,7 +12,7 @@ Clone the `cf-env` repository you forked to your github account.
 
 ## Change the app name
 
-Modify the `manifest.yml` in the repo you just cloned, then push the change to your remote.
+Modify the `manifest.yml` in the `cf-env` repo you just cloned, then push the change to your remote. 
 
 ```
 applications:

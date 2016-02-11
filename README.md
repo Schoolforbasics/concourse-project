@@ -12,6 +12,8 @@ Since we are in the process of changing the way we do our intermal pipelines and
 
 3) Run the `fly` command to target the concourse at `https://185.99.186.164` or `https://ci.vsphere.starkandwayne.com`.
 
+You can see useful info about how to use the `fly` command at [https://concourse.ci/fly-cli.html](https://concourse.ci/fly-cli.html).
+
 Tips:
 (1) Use an alias "`{{your_target_alias}}`" for your concourse target;
 
@@ -38,4 +40,3 @@ Please clean up the pipeline you set up by running:
 
 Hooray!
 
-XJ is tired but happy :)
