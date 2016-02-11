@@ -31,7 +31,7 @@ jobs:
         - {{cf-app-name}}
         - {{cf-username}}
         - {{cf-password}}
-        - 5
+        - {{app-instances-num}}
 
 resources:
 - name: resource-cf-app
