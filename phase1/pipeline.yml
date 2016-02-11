@@ -1,32 +1,42 @@
 ---
+# Reminder: In YAML files, spaces and tabs matter!
 jobs:
-  # Reminder: In yml files, space and tabs matters
 - name: job-deploy-app
   public: true
   serial: true
   plan:
   - get: resource-cf-app
-    # configure the trigger to be true, so it will trigger the pipeline
-    # when you push your changes to the repo after you already set up the pipeline. 
+    # configure the trigger to be true, so it will trigger the pipeline whenever
+    # you push your changes to the repo after you already set up the pipeline. 
+    # Hints:
+    #   1) You will find useful info here: 
+    #      `https://github.com/concourse/cf-resource` 
 
   - put: resource-deploy-cf-app
     params:
       # Configure the parameters you need to deploy the app to cf
-      # You will find useful info here: `https://github.com/concourse/cf-resource` 
+      # Hints:
+      #   1) You will find useful info here: 
+      #      `https://github.com/concourse/cf-resource` 
 
 resources:
 - name: resource-cf-app
-  # configure your resources, hints: it is a git type, and it should be fetched from
-  # the cf-env repo you forked to your own github account. About how to configure
-  # git type resource, you can refer: `https://github.com/concourse/git-resource`
+  # Configure your cf app resource, 
+  # Hints: 
+  #   1) It is a git type, and it should be fetched from the cf-env repo you 
+  #      forked to your own github account.
+  #   2) About how to configure git type resource, you can refer to: 
+  #      `https://github.com/concourse/git-resource`
   type: 
   source:
     
 
 - name: resource-deploy-cf-app
-  # configure your resources: hints: 1) the type is cf; 2) you can refer 
-  # `https://github.com/concourse/cf-resource`; 3) instead of directly 
-  # show username and password etc., suggesting you use the variables 
-  # setting in `credentials.yml`; 4) suggesting that we set 
-  # `skip_cert_check` to be true in this example.
+  # configure your deploy cf app resource: 
+  # hints: 
+  #   1) the type is cf; 
+  #   2) you can refer to `https://github.com/concourse/cf-resource`; 
+  #   3) instead of directly showng username and password etc., 
+  #      instead use variables in `credentials.yml`; 
+  #   4) set `skip_cert_check` to be true for this example.
  

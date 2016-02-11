@@ -21,12 +21,14 @@ jobs:
     
   - task: scale-cf-app
     config:
-      # Hints: How to configure a task, see the following link
-      # https://concourse.ci/running-tasks.html#configuring-tasks
-      # More specificly, you need to configue: platform, image,inputs and run
-      # the script you run is in `cf-env/bin/scale-app`,it will help you configure
-      # the task correctly
-      # most of the args/varibles you need are already in credentials.yml
+      # Hints: 
+      #   1) Regarding how to configure a task, see the following link:
+      #      https://concourse.ci/running-tasks.html#configuring-tasks
+      #   2) More specificly, you need to configue: 
+      #      platform, image,inputs and run
+      #   3) the script you run is in `cf-env/bin/scale-app`,
+      #      it will help you configure the task correctly and most of the 
+      #      args/varibles you need are already in credentials.yml
   
 resources:
 - name: resource-cf-app
